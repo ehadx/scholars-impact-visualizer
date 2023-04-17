@@ -1,0 +1,18 @@
+<p-table
+  [value]="scholars"
+  dataKey="id"
+  [scrollable]="true"
+  style="height: 300px">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>#</th>
+      <th>الإسم</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-scholar>
+    <tr>
+      <td>{{ scholar.id }}</td>
+      <td>{{ scholar.name }}</td>
+    </tr>
+  </ng-template>
+</p-table>

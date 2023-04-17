@@ -1,0 +1,16 @@
+:host ::ng-deep .p-toolbar {
+  border-radius: 0px;
+}
+
+.p-toolbar-group-start {
+  color: var(--primary-color-text);
+}
+
+.p-toolbar-group-start a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link-active {
+  color: var(--primary-color) !important;
+}

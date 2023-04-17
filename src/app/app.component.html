@@ -1,0 +1,14 @@
+<p-toolbar>
+  <div class="p-toolbar-group-start">
+    <div class="text-lg font-bold ml-5">عنوان</div>
+    <a
+      *ngFor="let link of links"
+      class="ml-3"
+      routerLink="{{ link.path }}"
+      routerLinkActive="link-active">
+      {{ link.header }}
+    </a>
+  </div>
+</p-toolbar>
+
+<router-outlet></router-outlet>

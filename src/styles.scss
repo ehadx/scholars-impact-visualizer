@@ -1,0 +1,36 @@
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-balham.css';
+@import 'primeflex/primeflex.css';
+@import 'primeicons/primeicons.css';
+@import './theme-nova-alt.scss';
+@import 'primeng/resources/primeng.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
+:root {
+  --font-family: 'Tajawal', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  direction: rtl;
+  text-align: start;
+}
+
+.p-component {
+  font-family: var(--font-family);
+}
+
+html,
+body {
+  font-family: var(--font-family);
+  padding: 0;
+  margin: 0;
+  height: 50%;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+.right-float-label.p-float-label label {
+  right: 0;
+  margin-right: 0.5rem;
+}

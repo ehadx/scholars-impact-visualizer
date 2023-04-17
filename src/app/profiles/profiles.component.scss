@@ -1,0 +1,18 @@
+form {
+  width: 95%;
+  margin: 0px auto;
+}
+
+.p-fieldset {
+  padding: 0px;
+}
+
+.p-float-label label {
+  right: 0;
+  margin-right: 0.5rem;
+}
+
+:host ::ng-deep .p-fieldset-toggler {
+  font-size: 10px;
+  margin-left: 10px;
+}

@@ -1,0 +1,47 @@
+<p-dialog
+  [header]="mode | dialogHeader"
+  [(visible)]="visible"
+  (visibleChange)="visibleChange.emit()"
+  [style]="{ minWidth: '250px', minHeight: '150px' }">
+  <form [formGroup]="form">
+    <div class="flex flex-column p-fluid gap-5 mt-3">
+      <div class="right-float-label p-float-label">
+        <input id="arabicName" formControlName="arabicName" pInputText />
+        <label for="arabicName">الاسم</label>
+      </div>
+
+      <div class="p-float-label">
+        <input
+          class="text-left"
+          id="englishName"
+          pInputText
+          formControlName="englishName" />
+        <label for="englishName">Name</label>
+      </div>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <div class="flex">
+      <div class="flex flex-grow-1">
+        <button
+          class="p-button-success action-btn"
+          pButton
+          pRipple
+          [disabled]="form.invalid"
+          (click)="onSave()">
+          حفظ
+        </button>
+      </div>
+      <div class="flex flex-grow-1">
+        <button
+          class="p-button-danger action-btn"
+          pButton
+          pRipple
+          (click)="onCancel()">
+          الغاء
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>

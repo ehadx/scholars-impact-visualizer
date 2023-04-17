@@ -1,0 +1,12 @@
+<div class="p-2">
+  <p-toolbar>
+    <ng-template pTemplate="right">
+      <button pButton (click)="dialog!.open()">إضافة فرد</button>
+    </ng-template>
+  </p-toolbar>
+  <app-scholars-table [scholars]="(scholars$ | async)!"></app-scholars-table>
+</div>
+
+<app-scholar-dialog
+  [form]="scholarForm"
+  [mode]="dialogMode"></app-scholar-dialog>
