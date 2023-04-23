@@ -1,3 +1,4 @@
+import { Profile } from './profile';
 import { Language } from './language';
 
 export interface Scholar {
@@ -12,26 +13,18 @@ export interface ScholarInfo {
 }
 
 export interface ScholarProfileAssociation {
-  profile: ScholarProfile;
+  profile: Profile;
   accuracy: number;
 }
 
-export interface ScholarProfile {
-  id: number;
-  birth: ScholarDate[];
-  death: ScholarDate[];
-  majors: ScholarMajor[];
-}
-
-export interface ScholarMajor {
-  id: number;
-  name: string;
-}
+export type ScholarDateType = 'birth' | 'death';
+export type ScholarDateEra = 'AC' | 'BC';
 
 export interface ScholarDate {
   day: number | null;
   month: number | null;
   year: number;
-  era: 'AC' | 'BC';
+  era: ScholarDateEra;
+  type: ScholarDateType;
   accuracy: number | null;
 }

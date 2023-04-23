@@ -9,6 +9,9 @@ import {
   LanguageState,
   LANGUAGE_KEY,
   languageAdapter,
+  countryAdapter,
+  CountryState,
+  COUNTRY_KEY,
 } from './app.reducer';
 
 const { selectAll: scholarAdapterSelectAll } = scholarAdapter.getSelectors();
@@ -38,4 +41,15 @@ export const selectLanguageState =
 export const selectAllLanguages = createSelector(
   selectLanguageState,
   languageAdapterSelectAll
+);
+
+export const { selectAll: countryAdapterSelectAll } =
+  countryAdapter.getSelectors();
+
+export const selectCountryState =
+  createFeatureSelector<CountryState>(COUNTRY_KEY);
+
+export const selectAllCountries = createSelector(
+  selectCountryState,
+  countryAdapterSelectAll
 );

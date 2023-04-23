@@ -1354,20 +1354,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "know-tracer"
-version = "0.0.0"
-dependencies = [
- "directories",
- "serde",
- "serde_json",
- "sqlx",
- "tauri",
- "tauri-build",
- "thiserror",
- "tokio",
-]
-
-[[package]]
 name = "kuchiki"
 version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2293,6 +2279,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "713cfb06c7059f3588fb8044c0fad1d09e3c01d225e25b9220dbfdcf16dbb1b3"
 dependencies = [
  "windows-sys 0.42.0",
+]
+
+[[package]]
+name = "scholars-impact-visualizer"
+version = "0.0.0"
+dependencies = [
+ "directories",
+ "serde",
+ "serde_json",
+ "sqlx",
+ "tauri",
+ "tauri-build",
+ "thiserror",
+ "tokio",
 ]
 
 [[package]]

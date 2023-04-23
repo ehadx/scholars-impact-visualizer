@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppActions } from './app.actions';
+import { AppActions, CountryActions } from './app.actions';
 
 @Component({
   selector: 'app-root',
@@ -16,5 +16,6 @@ export class AppComponent {
 
   constructor(private readonly store: Store) {
     this.store.dispatch(AppActions.loaded());
+    this.store.dispatch(CountryActions.loadRequest());
   }
 }

@@ -1,7 +1,12 @@
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import { ActionReducerMap, createReducer, on } from '@ngrx/store';
 import { Domain } from 'src/domain';
-import { LanguageActions, MajorActions, ScholarActions } from './app.actions';
+import {
+  CountryActions,
+  LanguageActions,
+  MajorActions,
+  ScholarActions,
+} from './app.actions';
 
 export const SCHOLAR_KEY = 'scholar';
 
@@ -24,9 +29,9 @@ export const scholarReducer = createReducer(
 
 export const MAJOR_KEY = 'major';
 
-export interface MajorState extends EntityState<Domain.ScholarMajor> {}
+export interface MajorState extends EntityState<Domain.Major> {}
 
-export const majorAdapter = createEntityAdapter<Domain.ScholarMajor>();
+export const majorAdapter = createEntityAdapter<Domain.Major>();
 
 export const majorInitialState: MajorState = majorAdapter.getInitialState();
 
@@ -56,14 +61,32 @@ export const languageReducer = createReducer(
   )
 );
 
+export const COUNTRY_KEY = 'country';
+
+export interface CountryState extends EntityState<Domain.Country> {}
+
+export const countryAdapter = createEntityAdapter<Domain.Country>();
+
+export const countryInitialState: CountryState =
+  countryAdapter.getInitialState();
+
+export const countryReducer = createReducer(
+  countryInitialState,
+  on(CountryActions.loadSuccess, (state, { countries }) =>
+    countryAdapter.setMany(countries, state)
+  )
+);
+
 export interface AppState {
   [SCHOLAR_KEY]: ScholarState;
   [MAJOR_KEY]: MajorState;
   [LANGUAGE_KEY]: LanguageState;
+  [COUNTRY_KEY]: CountryState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   [SCHOLAR_KEY]: scholarReducer,
   [MAJOR_KEY]: majorReducer,
   [LANGUAGE_KEY]: languageReducer,
+  [COUNTRY_KEY]: countryReducer,
 };

@@ -29,8 +29,15 @@ CREATE TABLE IF NOT EXISTS scholar_profiles (
     lang_id INTEGER,
     major_reference TEXT,
     additional_info TEXT,
-    sync_nation TEXT,
-    geographic_location TEXT
+    sync_nation TEXT
+);
+
+CREATE TABLE IF NOT EXISTS scholar_profile_country_map (
+    id INTEGER PRIMARY KEY,
+    profile_id INTEGER,
+    country_id INTEGER,
+    FOREIGN KEY(profile_id) REFERENCES scholar_profiles(id),
+    FOREIGN KEY(country_id) REFERENCES countries(id)
 );
 
 CREATE TABLE IF NOT EXISTS scholar_date (

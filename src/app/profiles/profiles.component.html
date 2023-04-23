@@ -1,23 +1,33 @@
-<form class="p-fluid grid p-4">
+<form class="p-fluid grid p-4" [formGroup]="profileForm">
   <div class="field w-full">
-    <p-fieldset legend="معلومات كذائية" [toggleable]="true">
+    <p-fieldset legend="الامكنة الجغرافية" [toggleable]="true">
       <div class="p-fluid grid p-2">
-        <div class="field col-12 md:col-4">
-          <span class="p-float-label">
-            <input type="text" id="name" pInputText />
-            <label for="name">الإسم</label>
-          </span>
-        </div>
-        <div class="field col-12 md:col-4">
+        <div class="field col">
           <span class="p-float-label">
             <p-autoComplete
-              [(ngModel)]="majorInputValue"
-              [ngModelOptions]="{ standalone: true }"
-              (ngModelChange)="onMajorInputValueChange()"
-              [suggestions]="(filteredMajors$ | async)!"
-              (on)="onSelectMajor()"
-              [forceSelection]="false"
+              field="en"
+              formControlName="selectedCountries"
+              (completeMethod)="filterCountries($event)"
+              [suggestions]="(filteredCountries$ | async)!"
+              [multiple]="true"></p-autoComplete>
+            <label for="name">الأمكنة الجغرافية</label>
+          </span>
+        </div>
+      </div>
+    </p-fieldset>
+  </div>
+
+  <div class="field w-full">
+    <p-fieldset legend="المجال العلمي" [toggleable]="true">
+      <div class="p-fluid grid p-2">
+        <div class="field col">
+          <span class="p-float-label">
+            <p-autoComplete
               field="name"
+              formControlName="selectedMajors"
+              [suggestions]="(filteredMajors$ | async)!"
+              (onSelect)="onSelectMajor()"
+              [forceSelection]="false"
               [multiple]="true"></p-autoComplete>
             <label for="major">المجال العلمي</label>
           </span>
@@ -26,74 +36,40 @@
     </p-fieldset>
   </div>
 
+  <app-dates-fieldset [(scholarDates)]="scholarDates"></app-dates-fieldset>
+
   <div class="field w-full">
-    <p-fieldset legend="الولادة والوفاة" [toggleable]="true" togg>
-      <div class="field col">
-        <div class="p-fluid grid">
-          <div class="field col-2">
-            <span class="p-float-label">
-              <p-inputNumber id="day" [min]="1" [max]="31"></p-inputNumber>
-              <label for="day">يوم</label>
-            </span>
-          </div>
-          <div class="field col-2">
-            <span class="p-float-label">
-              <p-inputNumber id="month" [min]="1" [max]="12"></p-inputNumber>
-              <label for="month">شهر</label>
-            </span>
-          </div>
-          <div class="field col-2">
-            <span class="p-float-label">
-              <p-inputNumber id="year" [min]="1" [max]="9999"></p-inputNumber>
-              <label for="year">سنة</label>
-            </span>
-          </div>
-          <div class="field col-3">
-            <span class="p-float-label">
-              <p-inputNumber
-                id="percentage"
-                [min]="1"
-                [max]="100"
-                prefix="%"></p-inputNumber>
-              <label for="percentage">نسبة التأكد</label>
-            </span>
-          </div>
-          <div class="field col-3" dir="ltr">
-            <p-selectButton
-              [options]="[
-                { label: 'ب.م', value: 'AC' },
-                { label: 'ق.م', value: 'BC' }
-              ]"
-              optionLabel="label"
-              optionValue="value"></p-selectButton>
-          </div>
+    <p-fieldset legend="معلومات إضافية">
+      <div class="p-fluid grid p-2">
+        <div class="field col-6">
+          <span class="p-float-label">
+            <input
+              id="school"
+              type="text"
+              pInputText
+              formControlName="school" />
+            <label for="school">المدرسة</label>
+          </span>
         </div>
-        <div class="p-fluid grid">
-          <div class="field col-4" dir="ltr">
-            <p-selectButton
-              [options]="[
-                { label: 'وفاة', value: 'death' },
-                { label: 'ولادة', value: 'birth' }
-              ]"
-              optionLabel="label"
-              optionValue="value"></p-selectButton>
-          </div>
-          <div class="field col-2 text-center">
-            <button class="justify-content-center p-button-success" pButton>
-              إضافة
-            </button>
-          </div>
+        <div class="field col-6">
+          <span class="p-float-label">
+            <input
+              id="syncNation"
+              type="text"
+              pInputText
+              formControlName="syncNation" />
+            <label for="syncNation">الدولة المعاصرة</label>
+          </span>
         </div>
-      </div>
-      <div class="field col">
-        <table class="w-full text-center border-1">
-          <thead>
-            <tr>
-              <th>ولادة</th>
-              <th>وفاة</th>
-            </tr>
-          </thead>
-        </table>
+        <div class="field col">
+          <span class="p-float-label">
+            <textarea
+              id="addionalInfo"
+              pInputTextarea
+              formControlName="additionalInfo"></textarea>
+            <label for="addionalInfo">معلومات إضافية</label>
+          </span>
+        </div>
       </div>
     </p-fieldset>
   </div>

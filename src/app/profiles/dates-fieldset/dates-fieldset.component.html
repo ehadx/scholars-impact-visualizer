@@ -1,0 +1,113 @@
+<form class="field w-full" [formGroup]="scholarDateForm">
+  <p-fieldset legend="الولادة والوفاة" [toggleable]="true">
+    <div class="field col">
+      <div class="p-fluid grid">
+        <div class="field col-2">
+          <span class="p-float-label">
+            <p-inputNumber
+              id="day"
+              [min]="1"
+              [max]="31"
+              formControlName="day"></p-inputNumber>
+            <label for="day">يوم</label>
+          </span>
+        </div>
+        <div class="field col-2">
+          <span class="p-float-label">
+            <p-inputNumber
+              id="month"
+              [min]="1"
+              [max]="12"
+              formControlName="month"></p-inputNumber>
+            <label for="month">شهر</label>
+          </span>
+        </div>
+        <div class="field col-2">
+          <span class="p-float-label">
+            <p-inputNumber
+              id="year"
+              [min]="1"
+              [max]="9999"
+              formControlName="year"></p-inputNumber>
+            <label for="year">سنة</label>
+          </span>
+        </div>
+        <div class="field col-3">
+          <span class="p-float-label">
+            <p-inputNumber
+              id="accuracy"
+              [min]="1"
+              [max]="100"
+              prefix="%"
+              formControlName="accuracy"></p-inputNumber>
+            <label for="accuracy">نسبة التأكد</label>
+          </span>
+        </div>
+        <div class="field col-3" dir="ltr">
+          <p-selectButton
+            [options]="[
+              { label: 'ب.م', value: 'AC' },
+              { label: 'ق.م', value: 'BC' }
+            ]"
+            optionLabel="label"
+            optionValue="value"
+            formControlName="era"></p-selectButton>
+        </div>
+      </div>
+      <div class="p-fluid grid">
+        <div class="field col-4" dir="ltr">
+          <p-selectButton
+            [options]="[
+              { label: 'وفاة', value: 'death' },
+              { label: 'ولادة', value: 'birth' }
+            ]"
+            optionLabel="label"
+            optionValue="value"
+            formControlName="type"></p-selectButton>
+        </div>
+        <div class="field col-2 text-center">
+          <button
+            class="justify-content-center p-button-success"
+            pButton
+            [disabled]="scholarDateForm.invalid"
+            (click)="onAddDate()">
+            إضافة
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="field col">
+      <table class="w-full text-center border-1">
+        <thead>
+          <tr>
+            <th>النوع</th>
+            <th>التاريخ</th>
+            <th>نسبة التأكد</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let date of scholarDates">
+            <td>
+              {{ date | scholarDateType }}
+            </td>
+            <td>
+              {{ date | scholarDate }}
+            </td>
+            <td>
+              {{ date.accuracy ? date.accuracy + '%' : 'غير محدد' }}
+            </td>
+            <td>
+              <button
+                pButton
+                class="p-button-danger p-button-text"
+                (click)="onDeleteDate(date)">
+                <span class="pi pi-times w-full text-center"></span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </p-fieldset>
+</form>

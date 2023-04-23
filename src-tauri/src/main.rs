@@ -1,17 +1,21 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-use sqlx::{migrate::MigrateDatabase, query, Pool, Sqlite, SqlitePool};
+use sqlx::{Pool, Sqlite};
 use tauri::{async_runtime, generate_handler, Builder};
 use tokio::{main, runtime::Handle};
 
 use crate::{
+    countries::find_all_countries,
+    database::create_database,
     error::Error,
     languages::find_all_languages,
     majors::find_all_majors,
     scholars::{create_scholar, create_scholar_multi_lang, find_all_scholars},
 };
 
+mod countries;
+mod database;
 mod error;
 mod languages;
 mod majors;
@@ -33,40 +37,11 @@ async fn main() -> Result<(), Error> {
             create_scholar,
             create_scholar_multi_lang,
             find_all_majors,
-            find_all_languages
+            find_all_languages,
+            find_all_countries,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 
     Ok(())
-}
-
-async fn create_database() -> Result<Pool<Sqlite>, Error> {
-    let documents = directories::UserDirs::new()
-        .expect("Cannot construct a UserDirs instance")
-        .document_dir()
-        .expect("Cannot find documents directory on this system")
-        .to_owned();
-    let url = "sqlite://".to_string() + documents.to_str().unwrap() + "/scholars.db";
-    println!("{}", url);
-    let mut new_database = false;
-    if !Sqlite::database_exists(&url).await.unwrap_or(false) {
-        Sqlite::create_database(&url).await?;
-        new_database = true;
-    }
-    let pool = SqlitePool::connect(&url).await?;
-
-    if new_database {
-        let mut tx = pool.begin().await?;
-        query(include_str!("../queries/database.sql"))
-            .execute(&mut tx)
-            .await?;
-
-        query(include_str!("../queries/languages/insert_default.sql"))
-            .execute(&mut tx)
-            .await?;
-        tx.commit().await?;
-    }
-
-    Ok(pool)
 }

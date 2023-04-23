@@ -7,17 +7,21 @@ import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
 import { DividerModule } from 'primeng/divider';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 import { RegisterRoutingModule } from './profiles-routing.module';
 import { ProfilesComponent } from './profiles.component';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DatesFieldsetComponent } from './dates-fieldset/dates-fieldset.component';
+import { ScholarDatePipe } from './scholar-date.pipe';
+import { ScholarDateTypePipe } from './scholar-date-type.pipe';
 
 @NgModule({
-  declarations: [ProfilesComponent],
+  declarations: [ProfilesComponent, DatesFieldsetComponent, ScholarDatePipe, ScholarDateTypePipe],
   imports: [
     CommonModule,
     RegisterRoutingModule,
-    FormsModule,
+    ReactiveFormsModule,
     InputTextModule,
     InputNumberModule,
     FieldsetModule,
@@ -25,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     ButtonModule,
     DividerModule,
     AutoCompleteModule,
+    InputTextareaModule,
   ],
 })
 export class ProfilesModule {}

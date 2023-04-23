@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AppActions, LanguageActions, ScholarActions } from './app.actions';
+import {
+  AppActions,
+  CountryActions,
+  LanguageActions,
+  ScholarActions,
+} from './app.actions';
 import { EMPTY, catchError, concatMap, exhaustMap, map, of } from 'rxjs';
 import { LanguageApiService } from './languages/language-api.service';
 import { ScholarApiService } from './scholars/scholar-api.service';
+import { CountryApiService } from './countries/country-api.service';
 
 @Injectable()
 export class AppEffects {
@@ -22,13 +28,31 @@ export class AppEffects {
     )
   );
 
+  public readonly loadCountries$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CountryActions.loadRequest),
+      exhaustMap(() =>
+        this.countryApi.findAll().pipe(
+          map((countries) => {
+            console.debug('countries', countries);
+            return CountryActions.loadSuccess({ countries });
+          }),
+          catchError((error) => {
+            console.error(error);
+            return EMPTY;
+          })
+        )
+      )
+    )
+  );
+
   public readonly loadScholars$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ScholarActions.loadRequest),
       exhaustMap(({ langId }) =>
         this.scholarApi.findAll(langId).pipe(
           map((scholars) => {
-            console.log(scholars);
+            console.debug('scholars', scholars);
             return ScholarActions.loadSuccess({ scholars });
           }),
           catchError((error) => {
@@ -58,6 +82,7 @@ export class AppEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly languageApi: LanguageApiService,
-    private readonly scholarApi: ScholarApiService
+    private readonly scholarApi: ScholarApiService,
+    private readonly countryApi: CountryApiService
   ) {}
 }

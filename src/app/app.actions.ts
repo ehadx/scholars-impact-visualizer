@@ -24,8 +24,8 @@ export const ScholarActions = createActionGroup({
 export const MajorActions = createActionGroup({
   source: 'Major',
   events: {
-    'Load Success': props<{ majors: Domain.ScholarMajor[] }>(),
-    'Add Success': props<{ major: Domain.ScholarMajor }>(),
+    'Load Success': props<{ majors: Domain.Major[] }>(),
+    'Add Success': props<{ major: Domain.Major }>(),
   },
 });
 
@@ -33,5 +33,13 @@ export const LanguageActions = createActionGroup({
   source: 'Language',
   events: {
     'Load Success': props<{ languages: Domain.Language[] }>(),
+  },
+});
+
+export const CountryActions = createActionGroup({
+  source: 'Country',
+  events: {
+    'Load Request': emptyProps(),
+    'Load Success': props<{ countries: Domain.Country[] }>(),
   },
 });
