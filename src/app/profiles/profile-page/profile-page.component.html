@@ -1,0 +1,75 @@
+<form class="p-fluid grid" [formGroup]="profileForm">
+  <div class="field w-full">
+    <p-fieldset legend="أساسيات" [toggleable]="true">
+      <div class="p-fluid grid pt-4">
+        <div class="field col-12">
+          <span class="right-float-label p-float-label">
+            <input id="title" type="text" pInputText formControlName="title" />
+            <label for="title">عنوان الملف</label>
+          </span>
+        </div>
+      </div>
+    </p-fieldset>
+  </div>
+
+  <app-countries-fieldset
+    class="field w-full"
+    [(countries)]="countries"></app-countries-fieldset>
+
+  <app-majors-fieldset
+    class="field w-full"
+    [(majors)]="majors"></app-majors-fieldset>
+
+  <app-dates-fieldset
+    class="field w-full"
+    [(scholarDates)]="scholarDates"></app-dates-fieldset>
+
+  <div class="field w-full">
+    <p-fieldset legend="معلومات إضافية" [toggleable]="true">
+      <div class="p-fluid grid pt-3">
+        <div class="field col-6">
+          <span class="right-float-label p-float-label">
+            <input
+              id="school"
+              type="text"
+              pInputText
+              formControlName="school" />
+            <label for="school">المدرسة</label>
+          </span>
+        </div>
+        <div class="field col-6">
+          <span class="right-float-label p-float-label">
+            <input
+              id="syncNation"
+              type="text"
+              pInputText
+              formControlName="syncNation" />
+            <label for="syncNation">الدولة المعاصرة</label>
+          </span>
+        </div>
+        <div class="field col-12">
+          <span class="right-float-label p-float-label">
+            <textarea
+              id="informationalFootprint"
+              pInputTextarea
+              formControlName="informationalFootprint"></textarea>
+            <label for="informationalFootprint">البصمة المعلوماتية</label>
+          </span>
+        </div>
+        <div class="field col-12">
+          <span class="right-float-label p-float-label">
+            <textarea
+              id="additionalNotes"
+              pInputTextarea
+              formControlName="additionalNotes"></textarea>
+            <label for="additionalNotes">ملاحظات عامة</label>
+          </span>
+        </div>
+      </div>
+    </p-fieldset>
+  </div>
+
+  <app-scholars-fieldset
+    class="field w-full"
+    [(profileAssociations)]="profileAssociations"></app-scholars-fieldset>
+</form>

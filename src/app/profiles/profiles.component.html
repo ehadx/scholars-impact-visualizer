@@ -1,80 +1,9 @@
-<form class="p-fluid grid p-4" [formGroup]="profileForm">
-  <div class="field w-full">
-    <p-fieldset legend="الامكنة الجغرافية" [toggleable]="true">
-      <div class="p-fluid grid p-2">
-        <div class="field col">
-          <span class="p-float-label">
-            <p-autoComplete
-              field="en"
-              formControlName="selectedCountries"
-              (completeMethod)="filterCountries($event)"
-              [suggestions]="(filteredCountries$ | async)!"
-              [multiple]="true"></p-autoComplete>
-            <label for="name">الأمكنة الجغرافية</label>
-          </span>
-        </div>
-      </div>
-    </p-fieldset>
-  </div>
+<p-table [value]="(profiles$ | async)!">
+  <ng-template pTemplate="caption">
+    <p-button label="إضافة ملف" (onClick)="openNewProfile()"></p-button>
+  </ng-template>
+</p-table>
 
-  <div class="field w-full">
-    <p-fieldset legend="المجال العلمي" [toggleable]="true">
-      <div class="p-fluid grid p-2">
-        <div class="field col">
-          <span class="p-float-label">
-            <p-autoComplete
-              field="name"
-              formControlName="selectedMajors"
-              [suggestions]="(filteredMajors$ | async)!"
-              (onSelect)="onSelectMajor()"
-              [forceSelection]="false"
-              [multiple]="true"></p-autoComplete>
-            <label for="major">المجال العلمي</label>
-          </span>
-        </div>
-      </div>
-    </p-fieldset>
-  </div>
-
-  <app-dates-fieldset [(scholarDates)]="scholarDates"></app-dates-fieldset>
-
-  <div class="field w-full">
-    <p-fieldset legend="معلومات إضافية">
-      <div class="p-fluid grid p-2">
-        <div class="field col-6">
-          <span class="p-float-label">
-            <input
-              id="school"
-              type="text"
-              pInputText
-              formControlName="school" />
-            <label for="school">المدرسة</label>
-          </span>
-        </div>
-        <div class="field col-6">
-          <span class="p-float-label">
-            <input
-              id="syncNation"
-              type="text"
-              pInputText
-              formControlName="syncNation" />
-            <label for="syncNation">الدولة المعاصرة</label>
-          </span>
-        </div>
-        <div class="field col">
-          <span class="p-float-label">
-            <textarea
-              id="addionalInfo"
-              pInputTextarea
-              formControlName="additionalInfo"></textarea>
-            <label for="addionalInfo">معلومات إضافية</label>
-          </span>
-        </div>
-      </div>
-    </p-fieldset>
-  </div>
-</form>
-
-<p-divider align="center">
-  <span class="text-lg">إعدادات</span>
-</p-divider>
+<p-dialog [(visible)]="dialogVisible" [header]="dialogHeader">
+  <app-profile-page [(model)]="currentProfile"></app-profile-page>
+</p-dialog>

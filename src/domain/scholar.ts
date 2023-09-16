@@ -1,4 +1,3 @@
-import { Profile } from './profile';
 import { Language } from './language';
 
 export interface Scholar {
@@ -10,11 +9,6 @@ export interface Scholar {
 export interface ScholarInfo {
   lang: Language;
   name: String;
-}
-
-export interface ScholarProfileAssociation {
-  profile: Profile;
-  accuracy: number;
 }
 
 export type ScholarDateType = 'birth' | 'death';

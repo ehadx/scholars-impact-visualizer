@@ -1,0 +1,61 @@
+<form class="field w-full" [formGroup]="associationForm">
+  <p-fieldset legend="الافراد المرفقة بالملف" [toggleable]="true">
+    <div class="field col">
+      <div class="p-fluid grid pt-3">
+        <div class="field col-6">
+          <span class="right-float-label p-float-label">
+            <p-autoComplete
+              id="scholar"
+              [forceSelection]="true"
+              [suggestions]="(filteredScholars$ | async)!"
+              (completeMethod)="filterScholars($event)"
+              formControlName="scholar"></p-autoComplete>
+            <label for="scholar">إختيار فرد</label>
+          </span>
+        </div>
+        <div class="field col-4">
+          <span class="right-float-label p-float-label">
+            <p-inputNumber
+              id="accuracy"
+              formControlName="accuracy"></p-inputNumber>
+            <label for="accuracy">نسبة التأكد</label>
+          </span>
+        </div>
+        <div class="field col-2">
+          <p-button
+            styleClass="p-button-success"
+            label="إضافة"
+            [disabled]="associationForm.invalid"
+            (onClick)="onAddAssociation()"></p-button>
+        </div>
+        <div class="field col">
+          <table class="w-full text-center border-1">
+            <thead>
+              <tr>
+                <th>إسم الفرد</th>
+                <th>نسبة التأكد</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let assoc of profileAssociations">
+                <td>{{ assoc.scholar.name }}</td>
+                <td>
+                  {{ assoc.accuracy ? assoc.accuracy + '%' : 'غير محدد' }}
+                </td>
+                <td>
+                  <button
+                    pButton
+                    class="p-button-danger p-button-text"
+                    (click)="onRemoveAssociation(assoc)">
+                    <span class="pi pi-times w-full text-center"></span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </p-fieldset>
+</form>

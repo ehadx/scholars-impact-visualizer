@@ -9,6 +9,7 @@ pub struct Major {
     id: i64,
     lang: Language,
     title: String,
+    reference: String,
 }
 
 #[command]
@@ -21,6 +22,7 @@ pub async fn find_all_majors(
         .map(|r: SqliteRow| Major {
             id: r.try_get::<i64, _>("id").unwrap(),
             title: r.try_get::<String, _>("title").unwrap(),
+            reference: r.try_get::<String, _>("reference").unwrap(),
             lang: Language {
                 id: r.try_get::<i64, _>("lang_id").unwrap(),
                 code: r.try_get::<String, _>("code").unwrap(),

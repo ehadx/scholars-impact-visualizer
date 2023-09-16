@@ -1,9 +1,9 @@
 <form class="field w-full" [formGroup]="scholarDateForm">
   <p-fieldset legend="الولادة والوفاة" [toggleable]="true">
     <div class="field col">
-      <div class="p-fluid grid">
+      <div class="p-fluid grid pt-3">
         <div class="field col-2">
-          <span class="p-float-label">
+          <span class="right-float-label p-float-label">
             <p-inputNumber
               id="day"
               [min]="1"
@@ -13,7 +13,7 @@
           </span>
         </div>
         <div class="field col-2">
-          <span class="p-float-label">
+          <span class="right-float-label p-float-label">
             <p-inputNumber
               id="month"
               [min]="1"
@@ -23,7 +23,7 @@
           </span>
         </div>
         <div class="field col-2">
-          <span class="p-float-label">
+          <span class="right-float-label p-float-label">
             <p-inputNumber
               id="year"
               [min]="1"
@@ -33,7 +33,7 @@
           </span>
         </div>
         <div class="field col-3">
-          <span class="p-float-label">
+          <span class="right-float-label p-float-label">
             <p-inputNumber
               id="accuracy"
               [min]="1"

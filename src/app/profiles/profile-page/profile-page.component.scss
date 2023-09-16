@@ -1,0 +1,13 @@
+form {
+  width: 95%;
+  margin: 0px auto;
+}
+
+.p-fieldset {
+  padding: 0px;
+}
+
+:host ::ng-deep .p-fieldset-toggler {
+  font-size: 10px;
+  margin-left: 10px;
+}

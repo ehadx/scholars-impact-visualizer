@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS scholar_basic_info (
 CREATE TABLE IF NOT EXISTS scholar_profiles (
     id INTEGER PRIMARY KEY,
     lang_id INTEGER,
-    major_reference TEXT,
     additional_info TEXT,
     sync_nation TEXT
 );
@@ -40,13 +39,22 @@ CREATE TABLE IF NOT EXISTS scholar_profile_country_map (
     FOREIGN KEY(country_id) REFERENCES countries(id)
 );
 
+CREATE TABLE IF NOT EXISTS country_notes (
+    id INTEGER PRIMARY KEY,
+    profile_country_map_id INTEGER,
+    lang_id INTEGER,
+    note TEXT,
+    FOREIGN KEY (profile_country_map_id) REFERENCES scholar_profile_country_map(id),
+    FOREIGN KEY (lang_id) REFERENCES languages(id)
+);
+
 CREATE TABLE IF NOT EXISTS scholar_date (
     id INTEGER PRIMARY KEY,
     scholar_profile_id INTEGER,
     day INTEGER,
     month INTEGER,
     year INTEGER NOT NULL,
-    era texT Not null,
+    era TEXT NOT NULL,
     date_type TEXT NOT NULL,
     accuracy INTEGER,
     FOREIGN KEY(scholar_profile_id) references scholar_profiles(id)
@@ -60,6 +68,7 @@ CREATE TABLE IF NOT EXISTS major_info (
     id INTEGER PRIMARY KEY,
     major_id INTEGER,
     lang_id INTEGER,
+    reference TEXT,
     title TEXT,
     FOREIGN KEY(major_id) REFERENCES majors(id),
     FOREIGN KEY(lang_id) REFERENCES languages(id)

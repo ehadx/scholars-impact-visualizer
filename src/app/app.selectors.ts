@@ -12,6 +12,9 @@ import {
   countryAdapter,
   CountryState,
   COUNTRY_KEY,
+  profileAdapter,
+  ProfileState,
+  PROFILE_KEY,
 } from './app.reducer';
 
 const { selectAll: scholarAdapterSelectAll } = scholarAdapter.getSelectors();
@@ -52,4 +55,14 @@ export const selectCountryState =
 export const selectAllCountries = createSelector(
   selectCountryState,
   countryAdapterSelectAll
+);
+
+const { selectAll: profileAdapterSelectAll } = profileAdapter.getSelectors();
+
+export const selectProfileState =
+  createFeatureSelector<ProfileState>(PROFILE_KEY);
+
+export const selectAllProfiles = createSelector(
+  selectProfileState,
+  profileAdapterSelectAll
 );

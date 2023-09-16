@@ -13,6 +13,12 @@ export class ScholarApiService {
     return from(invoke<Domain.Scholar[]>('find_all_scholars', { langId }));
   }
 
+  public findAllWhereName(name: string): Observable<Domain.Scholar[]> {
+    return from(
+      invoke<Domain.Scholar[]>('find_all_scholars_where_name', { name })
+    );
+  }
+
   public createWithMultiLang(
     info: Domain.ScholarInfo[],
     langId: number

@@ -5,6 +5,7 @@ import {
   CountryActions,
   LanguageActions,
   MajorActions,
+  ProfileAcitons,
   ScholarActions,
 } from './app.actions';
 
@@ -77,11 +78,28 @@ export const countryReducer = createReducer(
   )
 );
 
+export const PROFILE_KEY = 'profile';
+
+export interface ProfileState extends EntityState<Domain.Profile> {}
+
+export const profileAdapter = createEntityAdapter<Domain.Profile>();
+
+export const profileInitialState: ProfileState =
+  profileAdapter.getInitialState();
+
+export const profileReducer = createReducer(
+  profileInitialState,
+  on(ProfileAcitons.loadSuccess, (state, { profiles }) =>
+    profileAdapter.setMany(profiles, state)
+  )
+);
+
 export interface AppState {
   [SCHOLAR_KEY]: ScholarState;
   [MAJOR_KEY]: MajorState;
   [LANGUAGE_KEY]: LanguageState;
   [COUNTRY_KEY]: CountryState;
+  [PROFILE_KEY]: ProfileState;
 }
 
 export const reducers: ActionReducerMap<AppState> = {
@@ -89,4 +107,5 @@ export const reducers: ActionReducerMap<AppState> = {
   [MAJOR_KEY]: majorReducer,
   [LANGUAGE_KEY]: languageReducer,
   [COUNTRY_KEY]: countryReducer,
+  [PROFILE_KEY]: profileReducer,
 };

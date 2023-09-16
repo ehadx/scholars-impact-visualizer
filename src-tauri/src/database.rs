@@ -23,22 +23,19 @@ pub async fn create_database() -> Result<Pool<Sqlite>, Error> {
         query(include_str!("../queries/countries/countries.sql"))
             .execute(&mut tx)
             .await?;
-        println!("{}", "after countries");
 
         query(include_str!("../queries/countries/insert_default.sql"))
             .execute(&mut tx)
             .await?;
-        println!("{}", "after insert countries");
 
         query(include_str!("../queries/database.sql"))
             .execute(&mut tx)
             .await?;
-        println!("{}", "after database");
 
         query(include_str!("../queries/languages/insert_default.sql"))
             .execute(&mut tx)
             .await?;
-        println!("{}", "after insert languages");
+
         tx.commit().await?;
     }
 

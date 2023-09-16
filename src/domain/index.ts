@@ -3,6 +3,7 @@ import * as fromLanguage from './language';
 import * as fromCountry from './country';
 import * as fromMajor from './major';
 import * as fromProfile from './profile';
+import * as fromAssociations from './associations';
 
 export namespace Domain {
   export type Scholar = fromScholar.Scholar;
@@ -14,4 +15,12 @@ export namespace Domain {
   export type Language = fromLanguage.Language;
   export type Country = fromCountry.Country;
   export type Profile = fromProfile.Profile;
+  export type ProfileCountry = fromProfile.ProfileCountry;
+  export type ProfileMajor = fromProfile.ProfileMajor;
+  export type ScholarProfileAssociation =
+    fromAssociations.ScholarProfileAssociation;
+}
+
+export namespace Defaults {
+  export const profile = fromProfile.defaultProfile;
 }

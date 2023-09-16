@@ -6,7 +6,7 @@ import {
   LanguageActions,
   ScholarActions,
 } from './app.actions';
-import { EMPTY, catchError, concatMap, exhaustMap, map, of } from 'rxjs';
+import { EMPTY, catchError, concatMap, exhaustMap, map } from 'rxjs';
 import { LanguageApiService } from './languages/language-api.service';
 import { ScholarApiService } from './scholars/scholar-api.service';
 import { CountryApiService } from './countries/country-api.service';

@@ -43,3 +43,11 @@ export const CountryActions = createActionGroup({
     'Load Success': props<{ countries: Domain.Country[] }>(),
   },
 });
+
+export const ProfileAcitons = createActionGroup({
+  source: 'Profile',
+  events: {
+    'Load Request': props<{ langId: number }>(),
+    'Load Success': props<{ profiles: Domain.Profile[] }>(),
+  },
+});
